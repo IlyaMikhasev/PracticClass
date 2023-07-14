@@ -19,13 +19,15 @@ namespace PracticClass
         public Form1()
         {
             InitializeComponent();
+            updateNumericStudent();
         }
 
         private void b_add_Click(object sender, EventArgs e)
         {
-            student= new Student(tb_name.Text,tb_surname.Text,tb_patr.Text,dateTimePicker1.Value);
+            lb_listStudent.Items.Clear();
+            student = new Student(tb_name.Text,tb_surname.Text,tb_patr.Text,dateTimePicker1.Value);
             students.Add(student);
-            surname.Add(student.Surname);
+            surname.Add(student._surname);
             surname.Sort();
             updateNumericStudent();
             saveToXml();
@@ -33,6 +35,13 @@ namespace PracticClass
         private void saveToXml(string path = "Students.xml")
         {
             Student.Serealize_it(students, path);
+            refreshList();
+        }
+        private void refreshList(string path = "Students.xml")
+        {
+            Student.Deserealize_it(path, out students);
+            lb_listStudent.Items.Clear();
+            updateNumericStudent();
         }
         private void updateNumericStudent()
         {
@@ -41,10 +50,13 @@ namespace PracticClass
                 int id = 1;
                 for (int i = 0; i < students.Count; i++)
                 {
-                    if(famaly== students[i].Surname)
-                        students[i].ID= id++;
-                    lb_listStudent.Items.Add(students[i].PrintStudent());
+                    if (famaly == students[i]._surname)
+                    {
+                        students[i]._id_student = id;
+                        lb_listStudent.Items.Add(students[i].PrintStudent());
+                    }
                 }
+                id++;
             }
         }
         

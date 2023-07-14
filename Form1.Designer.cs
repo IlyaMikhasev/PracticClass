@@ -83,7 +83,7 @@
             this.tb_surname.Location = new System.Drawing.Point(141, 10);
             this.tb_surname.Name = "tb_surname";
             this.tb_surname.Size = new System.Drawing.Size(100, 20);
-            this.tb_surname.TabIndex = 2;
+            this.tb_surname.TabIndex = 1;
             // 
             // tb_name
             // 
@@ -97,7 +97,7 @@
             this.tb_patr.Location = new System.Drawing.Point(141, 61);
             this.tb_patr.Name = "tb_patr";
             this.tb_patr.Size = new System.Drawing.Size(100, 20);
-            this.tb_patr.TabIndex = 2;
+            this.tb_patr.TabIndex = 3;
             // 
             // dateTimePicker1
             // 

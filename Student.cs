@@ -9,31 +9,31 @@ using System.Xml.Serialization;
 namespace PracticClass
 {
     [Serializable]
-    internal class Student
+    public class Student
     {
         [XmlAttribute]
-        int _id_student = 0;
+        public int _id_student;
         [XmlAttribute]
-        string _name;
+        public string _name;
         [XmlAttribute]
-        string _surname;
+        public string _surname;
         [XmlAttribute]
-        string _patr;
+        public string _patr;
         [XmlAttribute]
-        string _birthday;
+        public string _birthday;
         public Student() { }
         public Student(string name, string surname, string patr, DateTime birth_d) {
             _name= name;
             _surname= surname;
             _patr= patr;
-            _birthday= birth_d.ToString();
+            _birthday= birth_d.ToString("yyyy.MM.dd");
         }
         public override string ToString()
         {
-            return $"{this.ID} {this.Surname} {this.Name} {this.Patr}";
+            return $"{this._id_student} {this._surname} {this._name} {this._patr}";
         }
         public string PrintStudent() {
-            return ID.ToString()+_name+" "+ _surname+" "+ _patr+" "+ _birthday;
+            return _id_student.ToString()+ " "+ _surname+" " + _name+" "+ _patr+" "+ _birthday;
         }
         static public void Serealize_it(List<Student> objectGrath, string filename)
         {
@@ -52,11 +52,11 @@ namespace PracticClass
             {
                 lst = (List<Student>)xmlSerializer.Deserialize(fStream);
             }
-        }
+        }/*
         public string Name { get { return _name; } set { _name = value; } }
         public string Surname { get { return _surname; } set { _surname = value; } }
         public string Patr { get { return _patr; } set { _patr = value; } }
-        public int ID { get { return _id_student; } set { _id_student = value; } }
+        public int ID { get { return _id_student; } set { _id_student = value; } }*/
 
     }
 }
