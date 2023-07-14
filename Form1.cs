@@ -19,7 +19,10 @@ namespace PracticClass
         public Form1()
         {
             InitializeComponent();
-            updateNumericStudent();
+            foreach (var stud in students) {
+                surname.Add(stud._surname);
+            }
+            refreshList();
         }
 
         private void b_add_Click(object sender, EventArgs e)
@@ -45,9 +48,9 @@ namespace PracticClass
         }
         private void updateNumericStudent()
         {
+            int id = 1;
             foreach (var famaly in surname)
-            {
-                int id = 1;
+            {                
                 for (int i = 0; i < students.Count; i++)
                 {
                     if (famaly == students[i]._surname)
