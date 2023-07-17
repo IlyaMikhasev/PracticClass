@@ -124,6 +124,7 @@
             this.b_del.TabIndex = 5;
             this.b_del.Text = "Удалить";
             this.b_del.UseVisualStyleBackColor = true;
+            this.b_del.Click += new System.EventHandler(this.b_del_Click);
             // 
             // label5
             // 
@@ -139,6 +140,7 @@
             this.lb_listStudent.FormattingEnabled = true;
             this.lb_listStudent.Location = new System.Drawing.Point(425, 36);
             this.lb_listStudent.Name = "lb_listStudent";
+            this.lb_listStudent.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lb_listStudent.Size = new System.Drawing.Size(363, 381);
             this.lb_listStudent.TabIndex = 7;
             // 

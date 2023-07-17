@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -19,31 +21,33 @@ namespace PracticClass
         public Form1()
         {
             InitializeComponent();
-            foreach (var stud in students) {
-                surname.Add(stud._surname);
-            }
             refreshList();
+        }
+        private void updateSurnameList() {
+            surname.Clear();
+            foreach (var s in students) {
+                surname.Add(s._surname);
+            }
+            surname.Sort();
         }
 
         private void b_add_Click(object sender, EventArgs e)
         {
             lb_listStudent.Items.Clear();
             student = new Student(tb_name.Text,tb_surname.Text,tb_patr.Text,dateTimePicker1.Value);
-            students.Add(student);
-            surname.Add(student._surname);
-            surname.Sort();
-            updateNumericStudent();
+            students.Add(student);         
             saveToXml();
         }
         private void saveToXml(string path = "Students.xml")
         {
-            Student.Serealize_it(students, path);
+            Student.Serealize_it( path, students);
             refreshList();
         }
         private void refreshList(string path = "Students.xml")
         {
             Student.Deserealize_it(path, out students);
             lb_listStudent.Items.Clear();
+            updateSurnameList();
             updateNumericStudent();
         }
         private void updateNumericStudent()
@@ -62,6 +66,20 @@ namespace PracticClass
                 id++;
             }
         }
-        
+
+        private void b_del_Click(object sender, EventArgs e)
+        {
+            foreach (var stud in lb_listStudent.SelectedItems) {
+                int id_student = int.Parse(stud.ToString()[0].ToString());
+                foreach (Student s in students) {
+                    if (s._id_student == id_student)
+                    {
+                        students.Remove(s); break;
+                    }
+                }
+            }
+            File.Delete("Students.xml");
+            saveToXml();
+        }
     }
 }
